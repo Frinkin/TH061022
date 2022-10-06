@@ -3,7 +3,9 @@ import MainButton from "../components/MainButton";
 import MainLogo from "../components/MainLogo";
 import MainInput from "../components/MainInput";
 import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
+let routes = require('../../api/routes') //importing route
+routes(app)
 
 export default function Signin({ navigation }) {
   const [email, setemail] = useState("");
@@ -18,7 +20,7 @@ export default function Signin({ navigation }) {
     }
   };
   const login = async () => {
-    let userData = await AsyncStorage.getItem("userData");
+    let userData = await app.get(accountCtrl.get);
     if (userData) {
       userData = JSON.parse(userData);
       let arr = [...userData];
